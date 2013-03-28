@@ -18,82 +18,67 @@
     <!--Data context is set to sample data above and LayoutRoot contains the root grid where all other page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*" />
-            <RowDefinition Height=".5*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height=".5*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="300" />
         </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="7*" />
-            <ColumnDefinition Width="3*" />
-        </Grid.ColumnDefinitions>
+        <TextBlock Text="TwitchTv" Grid.Row="0" />
 
-        <TextBlock Text="TwitchTv" Grid.Row="0" Grid.Column="0" />
         <Button Name="search" 
-                Grid.Row="0" 
-                Grid.Column="1" 
-                HorizontalContentAlignment="Stretch"
-                VerticalContentAlignment="Stretch"
-                Content="Search"/>
+                Grid.Row="0"
+                Content="Search"
+                HorizontalAlignment="Right"/>
 
-        <Border Background="#FF21232A" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="AntiqueWhite" BorderThickness="1,0">
-            <TextBlock Text="BROWSE" Foreground="#FF646E7F" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" FontWeight="Bold"/>
-        </Border>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".5*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height=".5*" />
+            </Grid.RowDefinitions>
 
-        <Border Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="#FF2D3241" BorderBrush="AntiqueWhite" BorderThickness="1,0">
-            <Button Name="allChannels" Content="All Channels" BorderThickness="0" HorizontalAlignment="Left" Foreground="#FFB4BEC8"/>
-        </Border>
+            <Border Background="#FF21232A" Grid.Row="0" BorderBrush="AntiqueWhite" BorderThickness="1,0">
+                <TextBlock Text="BROWSE" Foreground="#FF646E7F" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" FontWeight="Bold"/>
+            </Border>
 
-        <Border Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Background="#FF2D3241" BorderBrush="AntiqueWhite" BorderThickness="1,0">
-            <Button Name="games" Content="Games" BorderThickness="0" HorizontalAlignment="Left" Foreground="#FFB4BEC8"/>
-        </Border>
+            <Border Grid.Row="1" Background="#FF2D3241" BorderBrush="AntiqueWhite" BorderThickness="1,0">
+                <Button Name="allChannels" Content="All Channels" BorderThickness="0" Foreground="#FFB4BEC8" HorizontalContentAlignment="Left"/>
+            </Border>
 
-        <Border Background="#FF21232A" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="AntiqueWhite" BorderThickness="1,0">
-            <TextBlock Text="FEATURED GAMES" Foreground="#FF646E7F" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" FontWeight="Bold"/>
-        </Border>
+            <Border Grid.Row="2" Background="#FF2D3241" BorderBrush="AntiqueWhite" BorderThickness="1,0">
+                <Button Name="games" Content="Games" BorderThickness="0" Foreground="#FFB4BEC8" HorizontalContentAlignment="Left" Padding="10,5,10,6"/>
+            </Border>
 
-        <Button Name="lol"
-                Grid.Row="5"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                Content="League of Legends" />
+            <Border Background="#FF21232A" Grid.Row="3" Grid.Column="0" BorderBrush="AntiqueWhite" BorderThickness="1,0">
+                <TextBlock Text="FEATURED GAMES" Foreground="#FF646E7F" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" FontWeight="Bold"/>
+            </Border>
+        </Grid>
 
-        <Button Name="starcraft2"
-                Grid.Row="6"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                Content="StarCraft II: Heart of the Swarm" />
 
-        <Button Name="wow"
-                Grid.Row="7"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                Content="World of Warcraft: Mists of Pandaria" />
-
-        <Button Name="dota2"
-                Grid.Row="8"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                Content="Dota 2" />
-
-        <Button Name="cod"
-                Grid.Row="9"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                Content="Call of Duty: Balck Ops II" />
-
-        <Button Name="poe"
-                Grid.Row="10"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                Content="Path of Exile" />
+        <ListBox x:Name="gamelist" Grid.Row="2">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Button Width="300" Height="100">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal" Height="1*">
+                                <!--fill in w/ picture preview source-->
+                                <Image Source="{Binding someshitgoeshere}" />
+                                <StackPanel Orientation="Vertical" Height=".75*">
+                                    <StackPanel Orientation="Horizontal" Height=".375*">
+                                        <TextBlock Width="50" Text="Title" />
+                                        <TextBlock Width="100" Text="{Binding Title}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Height=".375*">
+                                        <TextBlock Width="50" Text="Viewers" />
+                                        <TextBlock Width="100" Text="{Binding Viewercount}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </phone:PhoneApplicationPage>
