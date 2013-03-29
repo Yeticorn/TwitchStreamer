@@ -15,15 +15,36 @@
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
 
+   
+    
     <!--Data context is set to sample data above and LayoutRoot contains the root grid where all other page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.Resources>
+            <Style x:Key="borderstyle" TargetType="Border">
+                <Setter Property="Background" Value="#FF2D3241"></Setter>
+                <Setter Property="BorderThickness" Value="0,1"></Setter>
+                <Setter Property="BorderBrush" Value="#2E3342"></Setter>
+            </Style>
+            <Style x:Key="buttonstyle" TargetType="Button">
+                <Setter Property="Foreground" Value="#FFB4BEC8"></Setter>
+                <Setter Property="BorderThickness" Value="0"></Setter>
+            </Style>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="300" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock Text="TwitchTv" Grid.Row="0" />
+        <Border Grid.Row="0">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF518EBB" Offset="0"/>
+                    <GradientStop Color="#FF294877" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <TextBlock Text="Twitch Logo" />
+        </Border>
 
         <Button Name="search" 
                 Grid.Row="0"
@@ -38,47 +59,108 @@
                 <RowDefinition Height=".5*" />
             </Grid.RowDefinitions>
 
-            <Border Background="#FF21232A" Grid.Row="0" BorderBrush="AntiqueWhite" BorderThickness="1,0">
+            <Border Background="#FF21232A" Grid.Row="0" BorderBrush="AntiqueWhite" BorderThickness="0">
                 <TextBlock Text="BROWSE" Foreground="#FF646E7F" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" FontWeight="Bold"/>
             </Border>
 
-            <Border Grid.Row="1" Background="#FF2D3241" BorderBrush="AntiqueWhite" BorderThickness="1,0">
-                <Button Name="allChannels" Content="All Channels" BorderThickness="0" Foreground="#FFB4BEC8" HorizontalContentAlignment="Left"/>
+            <Border Grid.Row="1" Style="{StaticResource borderstyle}">
+                <Button Name="allChannels" Content="All Channels" Style="{StaticResource buttonstyle}" HorizontalContentAlignment="Left"/>
             </Border>
 
-            <Border Grid.Row="2" Background="#FF2D3241" BorderBrush="AntiqueWhite" BorderThickness="1,0">
-                <Button Name="games" Content="Games" BorderThickness="0" Foreground="#FFB4BEC8" HorizontalContentAlignment="Left" Padding="10,5,10,6"/>
+            <Border Grid.Row="2" Style="{StaticResource borderstyle}">
+                <Button Name="games" Content="Games" Style="{StaticResource buttonstyle}" HorizontalContentAlignment="Left" />
             </Border>
 
-            <Border Background="#FF21232A" Grid.Row="3" Grid.Column="0" BorderBrush="AntiqueWhite" BorderThickness="1,0">
+            <Border Background="#FF21232A" Grid.Row="3" Grid.Column="0" BorderBrush="AntiqueWhite" BorderThickness="0">
                 <TextBlock Text="FEATURED GAMES" Foreground="#FF646E7F" FontSize="22" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0" FontWeight="Bold"/>
             </Border>
         </Grid>
 
 
-        <ListBox x:Name="gamelist" Grid.Row="2">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Button Width="300" Height="100">
-                        <Button.Content>
-                            <StackPanel Orientation="Horizontal" Height="1*">
-                                <!--fill in w/ picture preview source-->
-                                <Image Source="{Binding someshitgoeshere}" />
-                                <StackPanel Orientation="Vertical" Height=".75*">
-                                    <StackPanel Orientation="Horizontal" Height=".375*">
-                                        <TextBlock Width="50" Text="Title" />
-                                        <TextBlock Width="100" Text="{Binding Title}"/>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal" Height=".375*">
-                                        <TextBlock Width="50" Text="Viewers" />
-                                        <TextBlock Width="100" Text="{Binding Viewercount}"/>
-                                    </StackPanel>
-                                </StackPanel>
+        <Grid x:Name="gamelist" Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Style="{StaticResource borderstyle}">
+                <Button Style="{StaticResource buttonstyle}">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <!--fill in w/ picture preview source-->
+                            <Image Source="{Binding someshitgoeshere}" />
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Width="Auto" Text="Title" />
+                                <TextBlock Width="Auto" Text="Derp"/>
                             </StackPanel>
-                        </Button.Content>
-                    </Button>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+            </Border>
+
+            <Border Grid.Row="1" Style="{StaticResource borderstyle}">
+                <Button Style="{StaticResource buttonstyle}">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <!--fill in w/ picture preview source-->
+                            <Image Source="{Binding someshitgoeshere}" />
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Width="Auto" Text="Title" />
+                                <TextBlock Width="Auto" Text="Derp"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+            </Border>
+
+            <Border Grid.Row="2" Style="{StaticResource borderstyle}">
+                <Button Style="{StaticResource buttonstyle}">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <!--fill in w/ picture preview source-->
+                            <Image Source="{Binding someshitgoeshere}" />
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Width="Auto" Text="Title" />
+                                <TextBlock Width="Auto" Text="Derp"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+            </Border>
+
+            <Border Grid.Row="3" Style="{StaticResource borderstyle}">
+                <Button Style="{StaticResource buttonstyle}">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <!--fill in w/ picture preview source-->
+                            <Image Source="{Binding someshitgoeshere}" />
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Width="Auto" Text="Title" />
+                                <TextBlock Width="Auto" Text="Derp"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+            </Border>
+
+            <Border Grid.Row="4" Style="{StaticResource borderstyle}">
+                <Button Style="{StaticResource buttonstyle}">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <!--fill in w/ picture preview source-->
+                            <Image Source="{Binding someshitgoeshere}" />
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Width="Auto" Text="Title" />
+                                <TextBlock Width="Auto" Text="Derp"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+            </Border>
+
+        </Grid>
     </Grid>
 </phone:PhoneApplicationPage>
