@@ -46,10 +46,9 @@
             <TextBlock Text="Twitch Logo" />
         </Border>
 
-        <Button Name="search" 
-                Grid.Row="0"
-                Content="Search"
-                HorizontalAlignment="Right"/>
+        <Button Name="search" Grid.Row="0" HorizontalAlignment="Right" BorderThickness="0" Padding="0">
+            <Image Source="Assets/menu_search.png" Stretch="None" />
+        </Button>
 
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
