@@ -2,8 +2,9 @@
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
-using TwitchStreamer.ViewModels;
 using System.Collections.ObjectModel;
+using TwitchStreamer.Resources;
+using TwitchRest.Api;
 
 namespace TwitchStreamer
 {
@@ -22,16 +23,16 @@ namespace TwitchStreamer
         }
 
         // Load data for the ViewModel Items
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo( NavigationEventArgs e )
         {
-            if (!App.ViewModel.IsDataLoaded)
+            if( !App.ViewModel.IsDataLoaded )
             {
                 App.ViewModel.LoadData();
             }
         }
 
         // Handle selection changed on LongListSelector
-        private void MainLongListSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void MainLongListSelector_SelectionChanged( object sender, SelectionChangedEventArgs e )
         {
             // If selected item is null (no selection) do nothing
             //if (MainLongListSelector.SelectedItem == null)
@@ -42,6 +43,21 @@ namespace TwitchStreamer
 
             // Reset selected item to null (no selection)
             //MainLongListSelector.SelectedItem = null;
+        }
+
+        private void PageLoaded( object sender, System.Windows.RoutedEventArgs e )
+        {
+            RestFactory.GetTopGames( RenderTopGames, ErrorTopGames );
+        }
+
+        private void RenderTopGames( TopGames topgames )
+        {
+            topgames.ToString();
+        }
+
+        private void ErrorTopGames( string errorMessage )
+        {
+
         }
 
         // Sample code for building a localized ApplicationBar
@@ -68,7 +84,7 @@ namespace TwitchStreamer
         public String Viewercount { get; set; }
         public String Preview { get; set; }
 
-        public Channel(String title, String user, String viewercount, String preview)
+        public Channel( String title, String user, String viewercount, String preview )
         {
             this.Title = title;
             this.User = user;
@@ -81,8 +97,8 @@ namespace TwitchStreamer
     {
         public Channels()
         {
-            Add(new Channel("Ex1 title", "Ex1 user", "Ex1 1000", "600x480"));
-            Add(new Channel("Ex2 title", "Ex2 user", "Ex2 1000", "600x480"));
+            Add( new Channel( "Ex1 title", "Ex1 user", "Ex1 1000", "600x480" ) );
+            Add( new Channel( "Ex2 title", "Ex2 user", "Ex2 1000", "600x480" ) );
         }
     }
 }
