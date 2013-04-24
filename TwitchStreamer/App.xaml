@@ -8,6 +8,7 @@
     <!--Application Resources-->
     <Application.Resources>
         <local:LocalizedStrings xmlns:local="clr-namespace:TwitchStreamer" x:Key="LocalizedStrings"/>
+        
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>
