@@ -10,7 +10,7 @@
 
         public Channel Channel { get; set; }
 
-        public string Preview { get; set; }
+        public Box Preview { get; set; }
 
         public string Name { get; set; }
 
