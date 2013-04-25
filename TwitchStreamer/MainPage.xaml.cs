@@ -81,49 +81,65 @@ namespace TwitchStreamer
                 //{
                 //    Height = new System.Windows.GridLength(80)
                 //});
-                border = new Border();
-                tTitle = new TextBlock();
-                tLivech = new TextBlock();
-                tViewers = new TextBlock();
-                button = new Button();
-                vPanel = new StackPanel();
-                hPanel = new StackPanel();
                 logo = new Image();
                 logo.Source = new BitmapImage(new Uri(game.Game.Logo.Medium, UriKind.Absolute));
                 logo.Margin = new System.Windows.Thickness(0, 0, 10, 0);
+
+                tTitle = new TextBlock();
                 tTitle.Text = game.Game.Name;
                 tTitle.Foreground = titlefontbrush;
                 tTitle.FontSize = 24;
+
+                tLivech = new TextBlock();
                 tLivech.Text = game.Channels.ToString() + " Live Channels";
                 tLivech.Foreground = livefontbrush;
                 tLivech.FontSize = 18;
+
+                tViewers = new TextBlock();
                 tViewers.Text = game.Viewers.ToString();
                 tViewers.Foreground = titlefontbrush;
                 tViewers.FontSize = 20;
 
-                Grid.SetRow(border, cnt);
-                
-                button.Content = hPanel;
-                button.BorderThickness = new System.Windows.Thickness(0);
-                hPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
-                hPanel.Children.Add(logo);
-                hPanel.Children.Add(vPanel);
-
+                vPanel = new StackPanel();
                 vPanel.Orientation = System.Windows.Controls.Orientation.Vertical;
                 vPanel.Width = 320;
-                vPanel.Children.Add(tTitle);
-                vPanel.Children.Add(tLivech);
-                vPanel.Children.Add(tViewers);
+                vPanel.Children.Add( tTitle );
+                vPanel.Children.Add( tLivech );
+                vPanel.Children.Add( tViewers );
 
+                hPanel = new StackPanel();
+                hPanel.Orientation = System.Windows.Controls.Orientation.Horizontal;
+                hPanel.Children.Add( logo );
+                hPanel.Children.Add( vPanel );
+
+                button = new Button();
+                button.Content = hPanel;
+                button.BorderThickness = new System.Windows.Thickness(0);
+                button.Tag = game.Game.Name;
+                button.Click += button_Click;
+
+                border = new Border();
                 border.Child = button;
                 border.Background = backgroundborderbrush;
                 border.BorderThickness = new System.Windows.Thickness(0, 1, 0, 0);
+
+                Grid.SetRow( border, cnt );
+
                 stackpanel.Children.Add(border);
+
                 scrollviewer.Content = stackpanel;
                 scrollviewer.Height = 500;
                 scrollviewer.Background = scrollbackgroundbrush;
+
                 cnt++;
             }
+        }
+
+        void button_Click( object sender, System.Windows.RoutedEventArgs e )
+        {
+            var game = ( (Button) sender ).Tag;
+
+            NavigationService.Navigate( new Uri( "/Channel.xaml?game=" + game, UriKind.Relative ) );
         }
 
         private void ErrorTopGames( string errorMessage )
@@ -148,28 +164,28 @@ namespace TwitchStreamer
         //}
     }
 
-    public class Channel
-    {
-        public String Title { get; set; }
-        public String User { get; set; }
-        public String Viewercount { get; set; }
-        public String Preview { get; set; }
+    //public class Channel
+    //{
+    //    public String Title { get; set; }
+    //    public String User { get; set; }
+    //    public String Viewercount { get; set; }
+    //    public String Preview { get; set; }
 
-        public Channel( String title, String user, String viewercount, String preview )
-        {
-            this.Title = title;
-            this.User = user;
-            this.Viewercount = viewercount;
-            this.Preview = preview;
-        }
-    }
+    //    public Channel( String title, String user, String viewercount, String preview )
+    //    {
+    //        this.Title = title;
+    //        this.User = user;
+    //        this.Viewercount = viewercount;
+    //        this.Preview = preview;
+    //    }
+    //}
 
-    public class Channels : ObservableCollection<Channel>
-    {
-        public Channels()
-        {
-            Add( new Channel( "Ex1 title", "Ex1 user", "Ex1 1000", "600x480" ) );
-            Add( new Channel( "Ex2 title", "Ex2 user", "Ex2 1000", "600x480" ) );
-        }
-    }
+    //public class Channels : ObservableCollection<Channel>
+    //{
+    //    public Channels()
+    //    {
+    //        Add( new Channel( "Ex1 title", "Ex1 user", "Ex1 1000", "600x480" ) );
+    //        Add( new Channel( "Ex2 title", "Ex2 user", "Ex2 1000", "600x480" ) );
+    //    }
+    //}
 }
