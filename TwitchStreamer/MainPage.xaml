@@ -18,7 +18,8 @@
    
     
     <!--Data context is set to sample data above and LayoutRoot contains the root grid where all other page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot" Background="Transparent" >
+        <!--<navigation:Frame Source="/Page1.xaml" />-->
         <Grid.Resources>
             <Style x:Key="borderstyle" TargetType="Border">
                 <Setter Property="Background" Value="#FF2D3241"></Setter>

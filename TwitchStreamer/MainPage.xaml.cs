@@ -7,6 +7,7 @@ using TwitchStreamer.Resources;
 using TwitchRest.Api;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
+using System.Windows;
 
 namespace TwitchStreamer
 {
@@ -18,10 +19,8 @@ namespace TwitchStreamer
             InitializeComponent();
 
             // Set the data context of the LongListSelector control to the sample data
-            DataContext = App.ViewModel;
+            //DataContext = App.ViewModel;
 
-            // Sample code to localize the ApplicationBar
-            //BuildLocalizedApplicationBar();
         }
 
         // Load data for the ViewModel Items
@@ -115,8 +114,9 @@ namespace TwitchStreamer
                 button = new Button();
                 button.Content = hPanel;
                 button.BorderThickness = new System.Windows.Thickness(0);
+                button.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
                 button.Tag = game.Game.Name;
-                button.Click += button_Click;
+                button.Click += new RoutedEventHandler(button_Click);
 
                 border = new Border();
                 border.Child = button;
@@ -127,12 +127,12 @@ namespace TwitchStreamer
 
                 stackpanel.Children.Add(border);
 
-                scrollviewer.Content = stackpanel;
-                scrollviewer.Height = 500;
-                scrollviewer.Background = scrollbackgroundbrush;
-
                 cnt++;
             }
+
+            scrollviewer.Content = stackpanel;
+            scrollviewer.Height = 500;
+            scrollviewer.Background = scrollbackgroundbrush;
         }
 
         void button_Click( object sender, System.Windows.RoutedEventArgs e )
