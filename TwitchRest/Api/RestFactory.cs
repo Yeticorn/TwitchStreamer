@@ -43,29 +43,29 @@ namespace TwitchRest.Api
         /// <param name="offset">Object offset for pagination. Default is 0.</param>
         /// <param name="embeddable">If set to true, only returns streams that can be embedded</param>
         /// <param name="hls">If set to true, only returns streams using HLS</param>
-        public static void GetStreams( string gameName, Action<StreamsResponse> success, Action<string> fail, string channel = null, int? limit = 25, int? offset = null, bool embeddable = false, bool hls = false )
+        public static void GetStreams( string gameName, Action<StreamsResponse> success, Action<string> fail)//, string channel = null, int? limit = 25, int? offset = null, bool embeddable = false, bool hls = false )
         {
             var url = string.Format( Urls.GameStreams, WebUtility.UrlEncode( gameName ) );
 
-            if( channel != null )
-            {
-                url += "&channel=" + channel;
-            }
+            //if( channel != null )
+            //{
+            //    url += "&channel=" + channel;
+            //}
 
-            if( offset != null )
-            {
-                url += "&offset=" + offset;
-            }
+            //if( offset != null )
+            //{
+            //    url += "&offset=" + offset;
+            //}
 
-            if( embeddable )
-            {
-                url += "&embeddable=true";
-            }
+            //if( embeddable )
+            //{
+            //    url += "&embeddable=true";
+            //}
 
-            if( hls )
-            {
-                url += "&hls=true";
-            }
+            //if( hls )
+            //{
+            //    url += "&hls=true";
+            //}
 
             Execute<StreamsResponse>( url, Method.GET, success, fail );
         }
