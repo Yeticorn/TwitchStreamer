@@ -147,6 +147,11 @@ namespace TwitchStreamer
 
         }
 
+        private void search_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Player.xaml" , UriKind.Relative));
+        }
+
         // Sample code for building a localized ApplicationBar
         //private void BuildLocalizedApplicationBar()
         //{
