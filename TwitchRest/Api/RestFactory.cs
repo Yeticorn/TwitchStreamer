@@ -22,6 +22,17 @@ namespace TwitchRest.Api
 
         private static IRestClient Client { get; set; }
 
+        /// <summary>
+        /// Gets the Twitch Client ID of the app
+        /// </summary>
+        private static string TwitchClientId
+        {
+            get
+            {
+                return "1ga07vqubv23idlrdti979llg32i9nv";
+            }
+        }
+
         #endregion
 
         /// <summary>
@@ -81,6 +92,7 @@ namespace TwitchRest.Api
         private static void Execute<T>( string url, Method method, Action<T> success, Action<string> fail ) where T : new()
         {
             var request = new RestRequest( url, method );
+            request.AddHeader( "Client-ID", TwitchClientId );
 
             Client.ExecuteAsync<T>( request, response =>
             {
